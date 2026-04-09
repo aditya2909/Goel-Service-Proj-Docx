@@ -14,11 +14,13 @@ const PORT = process.env.PORT || "5000";
 
 app.use(
   cors({
-    origin: "https://goel-service-proj-docx-k8fmvuhub-aditya2909s-projects.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    origin: "https://goel-service-proj-docx-tvij-client.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
   })
 );
+
+app.options("*", cors());
 app.use("/api/document", docRouter);
 app.use("/api/product", prodRouter);
 app.get("/", (req, res) => {
