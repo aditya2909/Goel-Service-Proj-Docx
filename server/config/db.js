@@ -1,15 +1,19 @@
 import mongoose from "mongoose";
-import "dotenv/config";
 
-const uri = process.env.MONGODB_URI;
+let isConnected = false;
 
 const connectDb = async () => {
+  if (isConnected) return;
+
   try {
-    const connect = await mongoose.connect(uri);
-    console.log(`MongoDB Connection successfully`);
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+
+    isConnected = conn.connections[0].readyState === 1;
+
+    console.log("MongoDB Connected");
   } catch (error) {
-    console.error("MongoDB connection interupted");
-    process.exit(1);
+    console.error("MongoDB connection failed:", error.message);
+    throw error;
   }
 };
 
