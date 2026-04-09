@@ -17,3 +17,8 @@ app.use("/api/document", docRouter);
 app.use("/api/product", prodRouter);
 
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
+
+app.get("/", (req, res) => {
+  res.send("Backend working!");
+
+  export default app;
